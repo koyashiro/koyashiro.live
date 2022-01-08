@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  rtsp-simple-server:
+    image: aler9/rtsp-simple-server:latest
+    container_name: rtsp-simple-server
+    volumes:
+      - type: bind
+        source: rtsp-simple-server/rtsp-simple-server.yml
+        target: /rtsp-simple-server.yml
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+      - 1935:1935
+    volumes:
+      - type: bind
+        source: nginx/nginx.conf
+        target: /etc/nginx/nginx.conf
+      - type: bind
+        source: nginx/cert.pem
+        target: /etc/nginx/cert.pem
+      - type: bind
+        source: nginx/cert.key
+        target: /etc/nginx/cert.key
