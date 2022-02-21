@@ -21,8 +21,8 @@ services:
         source: nginx/nginx.conf
         target: /etc/nginx/nginx.conf
       - type: bind
-        source: nginx/cert.pem
-        target: /etc/nginx/cert.pem
+        source: nginx/fullchain.pem
+        target: /etc/nginx/fullchain.pem
       - type: bind
-        source: nginx/cert.key
-        target: /etc/nginx/cert.key
+        source: nginx/privkey.pem
+        target: /etc/nginx/privkey.pem

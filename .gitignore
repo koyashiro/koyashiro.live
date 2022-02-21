@@ -1,0 +1,5 @@
+.env
+nginx/fullchain.pem
+nginx/privkey.pem
+certbot/etc/letsencrypt
+certbot/var/log/letsencrypt

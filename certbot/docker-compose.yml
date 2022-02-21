@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  certonly:
+    image: certbot/dns-cloudflare:latest
+    container_name: certbot-certonly
+    entrypoint:
+      - /docker-entrypoint.sh
+    command: certonly --dns-cloudflare --dns-cloudflare-credentials /credentials.ini -d "$DOMAIN"
+    environment:
+      DNS_CLOUDFLARE_EMAIL: ${DNS_CLOUDFLARE_EMAIL}
+      DNS_CLOUDFLARE_API_KEY: ${DNS_CLOUDFLARE_API_KEY}
+    volumes:
+      - type: bind
+        source: docker-entrypoint.sh
+        target: /docker-entrypoint.sh
+      - type: bind
+        source: etc/letsencrypt
+        target: /etc/letsencrypt
+      - type: bind
+        source: var/log/letsencrypt
+        target: /var/log/letsencrypt
+
+  renew:
+    image: certbot/dns-cloudflare:latest
+    container_name: certbot-renew
+    entrypoint:
+      - /docker-entrypoint.sh
+    command: renew
+    volumes:
+      - type: bind
+        source: docker-entrypoint.sh
+        target: /docker-entrypoint.sh
+      - type: bind
+        source: etc/letsencrypt
+        target: /etc/letsencrypt
+      - type: bind
+        source: var/log/letsencrypt
+        target: /var/log/letsencrypt
