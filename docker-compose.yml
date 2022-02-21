@@ -21,6 +21,9 @@ services:
         source: nginx/nginx.conf
         target: /etc/nginx/nginx.conf
       - type: bind
+        source: nginx/index.html
+        target: /etc/nginx/html/index.html
+      - type: bind
         source: nginx/fullchain.pem
         target: /etc/nginx/fullchain.pem
       - type: bind
