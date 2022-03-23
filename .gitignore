@@ -1,4 +1,5 @@
 .env
+nginx/allow.conf
 nginx/fullchain.pem
 nginx/privkey.pem
 certbot/etc/letsencrypt

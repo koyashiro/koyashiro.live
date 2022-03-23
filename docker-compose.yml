@@ -21,6 +21,9 @@ services:
         source: nginx/nginx.conf
         target: /etc/nginx/nginx.conf
       - type: bind
+        source: nginx/allow.conf
+        target: /etc/nginx/allow.conf
+      - type: bind
         source: nginx/index.html
         target: /etc/nginx/html/index.html
       - type: bind
