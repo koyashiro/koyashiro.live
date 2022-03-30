@@ -1,16 +1,8 @@
 version: "3.8"
 
 services:
-  rtsp-simple-server:
-    image: aler9/rtsp-simple-server:latest
-    container_name: rtsp-simple-server
-    volumes:
-      - type: bind
-        source: rtsp-simple-server/rtsp-simple-server.yml
-        target: /rtsp-simple-server.yml
-
   nginx:
-    image: nginx:latest
+    build: docker
     container_name: nginx
     ports:
       - 80:80
@@ -18,17 +10,14 @@ services:
       - 1935:1935
     volumes:
       - type: bind
-        source: nginx/nginx.conf
+        source: nginx.conf
         target: /etc/nginx/nginx.conf
       - type: bind
-        source: nginx/allow.conf
+        source: allow.conf
         target: /etc/nginx/allow.conf
       - type: bind
-        source: nginx/index.html
-        target: /etc/nginx/html/index.html
-      - type: bind
-        source: nginx/fullchain.pem
+        source: fullchain.pem
         target: /etc/nginx/fullchain.pem
       - type: bind
-        source: nginx/privkey.pem
+        source: privkey.pem
         target: /etc/nginx/privkey.pem

@@ -1,6 +1,6 @@
 .env
-nginx/allow.conf
-nginx/fullchain.pem
-nginx/privkey.pem
+allow.conf
+fullchain.pem
+privkey.pem
 certbot/etc/letsencrypt
 certbot/var/log/letsencrypt
