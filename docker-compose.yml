@@ -2,8 +2,7 @@ version: "3.8"
 
 services:
   nginx:
-    build: docker
-    container_name: nginx
+    image: ghcr.io/koyashiro/nginx-rtmp:latest
     ports:
       - 80:80
       - 443:443
