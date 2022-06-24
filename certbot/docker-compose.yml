@@ -27,6 +27,9 @@ services:
     entrypoint:
       - /docker-entrypoint.sh
     command: renew
+    environment:
+      DNS_CLOUDFLARE_EMAIL: ${DNS_CLOUDFLARE_EMAIL}
+      DNS_CLOUDFLARE_API_KEY: ${DNS_CLOUDFLARE_API_KEY}
     volumes:
       - type: bind
         source: docker-entrypoint.sh
