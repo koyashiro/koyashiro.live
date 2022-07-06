@@ -1,6 +1,8 @@
 services:
   nginx:
     image: ghcr.io/koyashiro/nginx-rtmp:latest
+    environment:
+      TZ: Asia/Tokyo
     ports:
       - 80:80
       - 443:443
