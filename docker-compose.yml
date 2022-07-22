@@ -4,9 +4,7 @@ services:
     environment:
       TZ: Asia/Tokyo
     ports:
-      - 80:80
       - 443:443
-      - 1935:1935
     volumes:
       - type: bind
         source: nginx.conf
