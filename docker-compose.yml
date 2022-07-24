@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: ghcr.io/koyashiro/nginx-rtmp:latest
+    image: nginx:latest
     environment:
       TZ: Asia/Tokyo
     ports:
@@ -10,14 +10,27 @@ services:
         source: nginx.conf
         target: /etc/nginx/nginx.conf
       - type: bind
-        source: allow.conf
-        target: /etc/nginx/allow.conf
-      - type: bind
         source: fullchain.pem
         target: /etc/nginx/fullchain.pem
       - type: bind
         source: privkey.pem
         target: /etc/nginx/privkey.pem
+    logging:
+      driver: json-file
+      options:
+        max-file: 3
+        max-size: 1M
+    restart: always
+  rtsp-simple-server:
+    image: aler9/rtsp-simple-server:latest
+    environment:
+      TZ: Asia/Tokyo
+      RTSP_RTSPDISABLE: true
+      RTSP_RTMPADDRESS: :1935
+      RTSP_HLSADDRESS: :80
+      RTSP_HLSALWAYSREMUX: true
+      RTSP_PATHS_ALL_PUBLISHUSER: ${USER}
+      RTSP_PATHS_ALL_PUBLISHPASS: ${PASSWORD}
     logging:
       driver: json-file
       options:
