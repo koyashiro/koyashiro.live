@@ -7,20 +7,18 @@ services:
       - 443:443
     volumes:
       - type: bind
-        source: nginx.conf
+        source: nginx/nginx.conf
         target: /etc/nginx/nginx.conf
-      - type: bind
-        source: fullchain.pem
-        target: /etc/nginx/fullchain.pem
-      - type: bind
-        source: privkey.pem
-        target: /etc/nginx/privkey.pem
+      - type: volume
+        source: lego-data
+        target: /etc/lego
     logging:
       driver: json-file
       options:
         max-file: 3
-        max-size: 1M
+        max-size: 10M
     restart: always
+
   rtsp-simple-server:
     image: aler9/rtsp-simple-server:latest
     environment:
@@ -37,5 +35,20 @@ services:
       driver: json-file
       options:
         max-file: 3
-        max-size: 1M
+        max-size: 10M
     restart: always
+
+  lego:
+    image: goacme/lego:latest
+    environment:
+      CLOUDFLARE_EMAIL: ${CLOUDFLARE_EMAIL}
+      CLOUDFLARE_DNS_API_TOKEN: ${CLOUDFLARE_DNS_API_TOKEN}
+    volumes:
+      - type: volume
+        source: lego-data
+        target: /etc/lego
+    profiles:
+      - lego
+
+volumes:
+  lego-data:

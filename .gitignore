@@ -1,6 +1,1 @@
 .env
-allow.conf
-fullchain.pem
-privkey.pem
-certbot/etc/letsencrypt
-certbot/var/log/letsencrypt
